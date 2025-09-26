@@ -1,0 +1,36 @@
+# PlatformIO build artifacts
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Build outputs
+*.bin
+*.elf
+*.hex
+*.map
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment files / secrets
+.env
+*.env
+*.key
+*.pem
+
+# Logs
+*.log
+
+# Wokwi / simulation files (optional)
+*.wokwi*
+
+# Other
+/.idea/
+.pio
