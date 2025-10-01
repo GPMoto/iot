@@ -1,59 +1,50 @@
-#include <Arduino.h>
 #include "DHT.h"
 
-#define DHTPIN 2       // Pino SDA → ligado no pino digital 2
+#define DHTPIN 2       // Pino de dados do DHT22
 #define DHTTYPE DHT22  // Tipo do sensor
-#define LED 13
-#define BUTTON 12
+#define LED 10
+#define BUTTON 11
 #define BUZZER 9
 
-bool estado = false;        // começa desligado (0)
-int leituraAnterior = HIGH; // leitura anterior do botão
-unsigned long ultimoTempo = 0; // para controle do tempo de 10s
-unsigned long ultimoDebounce = 0; 
-const unsigned long debounceDelay = 50;
+bool estado = false;              // começa desligado
+bool ultimoBotao = HIGH;          // último estado lido do botão
+unsigned long ultimoTempo = 0;    // para controle de 10s
 
-// Instancia o sensor DHT22
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   pinMode(LED, OUTPUT);
   pinMode(BUZZER, OUTPUT);
-  pinMode(BUTTON, INPUT_PULLUP); // botão com pull-up interno
+  pinMode(BUTTON, INPUT); // botão com pull-up interno
   Serial.begin(9600);
-
   dht.begin(); // inicializa o DHT22
+
+  Serial.println("Sistema iniciado");
 }
 
 void loop() {
-  int leituraAtual = digitalRead(BUTTON);
+  // Lê o botão
+  int leitura = digitalRead(BUTTON);
 
-  // debounce
-  if (leituraAtual != leituraAnterior) {
-    ultimoDebounce = millis();
+
+  // Detecta borda de descida (HIGH -> LOW) para toggle
+  if (leitura == 0 && ultimoBotao == 1) {
+    estado = !estado;
+    Serial.print("Toggle! Novo estado: ");
+    Serial.println(estado ? "LIGADO" : "DESLIGADO");
   }
 
-  if ((millis() - ultimoDebounce) > debounceDelay) {
-    // Detecta apenas borda de descida (HIGH -> LOW)
-    if (leituraAnterior == HIGH && leituraAtual == LOW) {
-      estado = !estado; // flip (toggle)
-      Serial.print("Novo estado: ");
-      Serial.println(estado);
-    }
-  }
+  // Atualiza o estado anterior do botão
+  ultimoBotao = leitura;
 
-  leituraAnterior = leituraAtual;
+  // Liga/desliga LED e buzzer
+  digitalWrite(LED, estado ? HIGH : LOW);
+  digitalWrite(BUZZER, estado ? 1 : 0);
 
-  // Controle do LED e Buzzer
-  if (estado) {
-    digitalWrite(LED, HIGH);
-    digitalWrite(BUZZER, HIGH);
-  } else {
-    digitalWrite(LED, LOW);
-    digitalWrite(BUZZER, LOW);
-  }
+  // Log do estado do LED e buzzer
 
-  // A cada 10 segundos, printar temperatura e umidade
+
+  // A cada 10 segundos, lê e mostra temperatura/umidade
   if (millis() - ultimoTempo >= 10000) {
     ultimoTempo = millis();
 
@@ -72,4 +63,6 @@ void loop() {
       Serial.println(" %");
     }
   }
+
+  delay(50); // pequeno atraso para não poluir o Serial
 }
