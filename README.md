@@ -1,7 +1,10 @@
 
-gpsmottu-sprint2
+# IOT - GPSMottu 
 
-Estou fazendo este projeto pensando em ser executado a partir do arquivo `diagram.json`.
+Esse projeto foi feito com Wokwi simulando Arduino + Protoboard + Led + Buzzer + Sensor DHT22 (Temperatura e Umidade).
+
+O código à ser executado está presente em `src/main.cpp`.
+
 
 O fluxo principal que eu espero que você use é:
 
@@ -77,4 +80,20 @@ pio run -t upload
 pio device monitor -b 115200
 ```
 
+## RESULTADOS OBTIDOS
+
+Aqui estão alguns resultados obtidos via terminal:
+```bash
+Sistema iniciado
+Toggle! Novo estado: LIGADO
+Temperatura: 24.00 °C
+Umidade: 40.00 %
+Temperatura: 24.00 °C
+Umidade: 40.00 %
+Toggle! Novo estado: DESLIGADO
+Temperatura: 24.00 °C
+Umidade: 40.00 %
+```
+
+![alt text](arduino.png)
 
