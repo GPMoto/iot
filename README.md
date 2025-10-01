@@ -1,6 +1,24 @@
 
 # IOT - GPSMottu 
 
+## Descrição da Solução:
+O Java API - Gestão de Motos é uma aplicação desenvolvida em Java com foco em auxiliar operadores e gestores de filiais no controle e monitoramento de motos, funcionários e setores da empresa.
+
+O sistema oferece funcionalidades para:
+
+-	Gestão de motos: cadastro, atualização de status e rastreamento em diferentes filiais.
+-	Controle via QR Code: associação de motos a QR Codes, permitindo rápida identificação e verificação no momento de entrada, saída ou movimentação.
+-	Mapeamento de setores e filiais: estruturação de áreas internas da empresa para facilitar a localização e organização.
+-	Gestão de funcionários: registro de colaboradores vinculados a cada filial, integrando informações relevantes para a operação.
+
+## Benefícios para o Negócio
+
+Com essas funcionalidades, a empresa consegue implementar um controle mais eficiente sobre as motos e sua localização, alcançando objetivos estratégicos como:
+-	Redução de perdas e prejuízos: evitar que motos sejam extraviadas ou deixem de ser monitoradas.
+-	Melhor comunicação interna: facilitar a troca de informações sobre a frota entre funcionários e gestores.
+-	Maior rastreabilidade: garantir que cada moto esteja sempre associada a uma filial, setor e responsável.
+
+
 Esse projeto foi feito com Wokwi simulando Arduino + Protoboard + Led + Buzzer + Sensor DHT22 (Temperatura e Umidade).
 
 O código à ser executado está presente em `src/main.cpp`.
