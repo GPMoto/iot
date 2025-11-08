@@ -33,72 +33,92 @@ O fluxo principal que eu espero que você use é:
 
 Este README mantém também instruções para configurar o ambiente (PlatformIO e Wokwi) e para trabalhar com a placa via PlatformIO caso queira compilar/upload localmente.
 
-## Execução a partir de `diagram.json` (recomendada)
+## Execução pelo site do wokwi
 
-Ordem recomendada de execução:
+1) Entre e logue no site `https://wokwi.com`
 
-1) Primeiro faça o build do firmware com PlatformIO (obrigatório antes de simular):
+- adicione o codigo main.cpp no sketch.ino
+- adicione as bibliotecas do libraries.txt no site
+- Adicione o diagram.json
 
-```bash
-# builda todos os ambientes configurados no project
-pio run
-# se precisar buildar um ambiente específico:
-# pio run -e <nome-do-ambiente>
+- Após isso rodar o projeto, esperar compilar e testar
+
+### Testes
+- Testar requests
+- Atenção precisa do token baerer, está no .txt junto com a entrega
+#### Links
+- GET - https://api.thinger.io/v3/users/felipeRibeiro12981957420984/devices/esp32_dht/resources/stats
+
+- Resposta
+```
+{
+    "estacionamento": 0,
+    "garagem": 1,
+    "oficina": 2,
+    "patio": 2,
+    "rua": 1,
+    "total": 6
+}
 ```
 
-2) Abra o projeto no VS Code:
+- GET - https://api.thinger.io/v3/users/felipeRibeiro12981957420984/devices/esp32_dht/resources/temp
 
-```bash
-code /home/gustavo/projects/iot/gpsmottu-sprint2
+- Resposta
+```
+{
+    temperatura: 23.098429
+}
 ```
 
-3) Instale a extensão do Wokwi no VS Code (Marketplace). Essa extensão lê o `diagram.json` e oferece um botão/controle para iniciar a simulação dentro do editor.
+- GET - https://api.thinger.io/v3/users/felipeRibeiro12981957420984/devices/esp32_dht/resources/motos
 
-4) Abra `diagram.json`. Depois de feito o build (passo 1), a extensão normalmente exibirá um botão ou um painel "Run" / "Simulate". Clique para iniciar a simulação. Você poderá interagir com os componentes virtuais (botões, LEDs, displays) diretamente.
+- Resposta
+```
+{
+    "m0": {
+        "condicao": "Em uso",
+        "descricaoDeEstado": "Disponivel para uso",
+        "distrito": {
+            "nome": "Patio",
+            "posicaoX": -73.55049896240234,
+            "posicaoY": -46.63330078125
+        },
+        "id": 0,
+        "nome": "Sport"
+    },
+    "m1": {
+        "condicao": "Parada",
+        "descricaoDeEstado": "Aguardando documentacao",
+        "distrito": {
+            "nome": "Patio",
+            "posicaoX": -73.55049896240234,
+            "posicaoY": -46.63330078125
+        },
+        "id": 1,
+        "nome": "Sport"
+    },
+    ...
+    "total": 6
+}
+```
+- POST - https://api.thinger.io/v3/users/felipeRibeiro12981957420984/devices/esp32_dht/resources/ligarLedMoto
 
-## Pré-requisitos (resumido)
-- Node.js + npm (para `wokwi-cli` e extensões que dependam de nodetools)
-- Python 3 + pip (para PlatformIO CLI)
-- VS Code
+- Body
+```
+{
+    "in": 0 ou 1
+}
 
-Se preferir também compilar/rodar na placa física, mantenho abaixo os passos para PlatformIO.
-
-## Instalar PlatformIO CLI
-Recomendo instalar usando o pip (Python). No terminal (zsh):
-
-```bash
-python3 -m pip install --user -U platformio
 ```
 
-Verifique:
+- Resposta
+```
+{
+    "message": "Led e buzzer da moto desligado!"
+}
 
-```bash
-pio --version
 ```
 
-## Instalar Wokwi CLI (opcional)
-```bash
-npm install -g @wokwi/cli
-```
-
-## Comandos PlatformIO úteis
-- Compilar:
-
-```bash
-pio run
-```
-
-- Upload:
-
-```bash
-pio run -t upload
-```
-
-- Monitor serial:
-
-```bash
-pio device monitor -b 115200
-```
 
 ## RESULTADOS OBTIDOS
 
