@@ -125,15 +125,9 @@ Este README mantém também instruções para configurar o ambiente (PlatformIO 
 Aqui estão alguns resultados obtidos via terminal:
 ```bash
 Sistema iniciado
-Toggle! Novo estado: LIGADO
 Temperatura: 24.00 °C
 Umidade: 40.00 %
-Temperatura: 24.00 °C
-Umidade: 40.00 %
-Toggle! Novo estado: DESLIGADO
 Temperatura: 24.00 °C
 Umidade: 40.00 %
 ```
-
-![alt text](arduino.png)
 
